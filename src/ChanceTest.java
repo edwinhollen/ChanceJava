@@ -8,5 +8,7 @@ public class ChanceTest {
          * Add some tests
          *
          */
+        Chance chance = new Chance();
+        System.out.println(chance.prefix());
     }
 }
