@@ -20,6 +20,10 @@ public class Chance {
         random = new Random(seed);
     }
 
+    public String capitalize(String input){
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
+    }
+
     /**
      * @return integer between Java's minimum and maximum limits
      */
@@ -107,6 +111,88 @@ public class Chance {
         String text = "";
         for(int i = 0; i < length; i++){
             text.concat(String.valueOf(this.character()));
+        }
+        return text;
+    }
+
+    /**
+     * @param objects array to pick from
+     * @return object from specified array of objects
+     */
+    public Object pick(Object[] objects){
+        return objects[this.integer(objects.length-1)];
+    }
+
+    /**
+     * @param words number of words in the sentence
+     * @return string of specified number of words that make up an English sentence
+     */
+    public String sentence(int words){
+        String text = "";
+
+        /*
+        Heads up!
+        The ChanceJS library used Javascript's handy Array.join() method here,
+        unfortunately Java has no such method.
+        Time to get dirty.
+         */
+
+        for(int i = 0; i < words; i++){
+            text.concat(this.word()+" ");
+        }
+        text = text.trim();
+
+        // Capitalize first letter
+        text = this.capitalize(text);
+
+        // Add a period
+        text.concat(".");
+
+        return text;
+    }
+
+    /**
+     * @return string of 12 to 18 words that make up an English sentence
+     */
+    public String sentence(){
+        return this.sentence(this.integer(12, 18));
+    }
+
+    /**
+     * @return string of characters that make up an English syllable
+     */
+    public String syllable(){
+        int length = this.integer(2, 3);
+        String consonants = "bcdfghjklmnprstvwz";
+        String vowels = "aeiou";
+        String text = "";
+        char chr = 0;
+        for(int i = 0; i < length; i++){
+            if(i == 0){
+                // First character can be anything
+                chr = this.character((consonants + vowels));
+            }else if(consonants.indexOf(chr) == -1){
+                // Last character was a vowel, need consonant
+                chr = this.character(consonants);
+            }else{
+                // Last character was a consonant, need a vowel
+                chr = this.character(vowels);
+            }
+
+            text.concat(String.valueOf(chr));
+        }
+
+        return text;
+    }
+
+    /**
+     * @return string of syllables that make up an English word
+     */
+    public String word(){
+        int syllables = this.integer(1, 3);
+        String text = "";
+        for(int i = 0; i < syllables; i++){
+            text.concat(this.syllable());
         }
         return text;
     }
