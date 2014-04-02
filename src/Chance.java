@@ -13,7 +13,7 @@ public class Chance {
     private final static String[] NAME_PREFIXES_LONG = {"Doctor", "Miss", "Misses", "Mister"};
     private final static String[] NAME_PREFIXES_SHORT = {"Dr.", "Miss", "Mrs.", "Mr."};
     private Random random;
-    ;
+
 
     public Chance() {
         // No seed specified, use UNIX timestamp
@@ -49,15 +49,10 @@ public class Chance {
     }
 
     /**
-     * @param min
-     * @param max
+     * @param min integer minimum limit
+     * @param max integer maximum limit
      * @return integer between specified min and max limits
      */
-    /*
-    public int integer(int min, int max){
-        return random.nextInt(max - min) + min;
-    }
-    */
     public int integer(int min, int max) {
         min = Math.max(min, MIN_INT + 1);
         max = Math.min(max, MAX_INT - 1);
@@ -108,8 +103,7 @@ public class Chance {
      * @return character from custom pool argument string
      */
     public char character(String customPool) {
-        String pool = customPool;
-        return pool.charAt(this.integer(pool.length()-1));
+        return customPool.charAt(this.integer(pool.length() - 1));
     }
 
     /**
