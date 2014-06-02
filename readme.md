@@ -26,7 +26,7 @@ A library for all things random, based roughly on the fabulous [ChanceJS](https:
 * Names, first, middle, and last
 * Dice rolls, from 4 to 100-sided
 * Characters (letters)
-* Strings (of characters), sentences, and paragraphs. 
-* Pick from a given array of objects.
-* Age, in a specified age group.
+* Strings (of characters), sentences, and paragraphs
+* Pick from a given array of objects
+* Age, in a specified age group
 * Gender
