@@ -12,7 +12,9 @@ A library for all things random, based roughly on the fabulous [ChanceJS](https:
 4. Use it!
 
     String name = chance.name();
+    
     int diceRoll = chance.d12();
+    
     int randomInt = chance.integer(-10, 10);
 
 ## Features
