@@ -4,7 +4,6 @@ public class Chance {
     private final static int MAX_INT = Integer.MAX_VALUE;
     private final static int MIN_INT = Integer.MIN_VALUE;
     private final static char[] NUMBERS = ("1234567890").toCharArray();
-    private final static String HEX_POOL = new String(NUMBERS) + "abcdef";
     private final static char[] CHARS_LOWER = ("abcdefghijklmnopqrstuvwxyz").toCharArray();
     private final static char[] CHARS_UPPER = new String(CHARS_LOWER).toUpperCase().toCharArray();
     private final static char[] SYMBOLS = ("!@#$%^&*()[]").toCharArray();
@@ -14,11 +13,11 @@ public class Chance {
     private final static String[] NAME_PREFIXES_SHORT = {"Dr.", "Miss", "Mrs.", "Mr."};
     private Random random;
 
-
     public Chance() {
         // No seed specified, use UNIX timestamp
         random = new Random((System.currentTimeMillis() / 1000L));
     }
+
 
     public Chance(long seed) {
         // Use this seed
@@ -69,6 +68,7 @@ public class Chance {
 
     /**
      * Returns
+     *
      * @param likelihood between 0 and 100
      * @return boolean at a custom chance of being true
      */
@@ -95,7 +95,7 @@ public class Chance {
      */
     public char character(char[] customPool) {
         String pool = new String(customPool);
-        return pool.charAt(this.integer(pool.length()-1));
+        return pool.charAt(this.integer(pool.length() - 1));
     }
 
     /**
@@ -103,7 +103,7 @@ public class Chance {
      * @return character from custom pool argument string
      */
     public char character(String customPool) {
-        return customPool.charAt(this.integer(pool.length() - 1));
+        return customPool.charAt(this.integer(customPool.length() - 1));
     }
 
     /**
@@ -209,7 +209,6 @@ public class Chance {
     }
 
     /**
-     *
      * @return int of a random age
      */
     public int age() {
@@ -217,7 +216,6 @@ public class Chance {
     }
 
     /**
-     *
      * @param a Age category to generate from
      * @return int age from category
      */
@@ -236,18 +234,16 @@ public class Chance {
         }
     }
 
-    // -- Person --
-
     /**
-     *
      * @return String of a random gender (male or female)
      */
     public String gender() {
         return (String) this.pick(new String[]{"male", "female"});
     }
 
+    // -- Person --
+
     /**
-     *
      * @return String of a random first name
      */
     public String first() {
@@ -255,7 +251,6 @@ public class Chance {
     }
 
     /**
-     *
      * @return String of a random last name
      */
     public String last() {
@@ -263,7 +258,6 @@ public class Chance {
     }
 
     /**
-     *
      * @return String of a first name, middle initial, and last name
      */
     public String name() {
@@ -271,7 +265,6 @@ public class Chance {
     }
 
     /**
-     *
      * @param middleInitial set true to generate a name with a middle initial
      * @return String with or without a middle initial based on parameter
      */
@@ -286,7 +279,6 @@ public class Chance {
     }
 
     /**
-     *
      * @return String of a name prefix in the short style (ex. Mrs. or Dr.)
      */
     public String prefix() {
@@ -294,7 +286,6 @@ public class Chance {
     }
 
     /**
-     *
      * @param longStyle boolean, set to true for a prefix in the long style (ex. Misses or Doctor)
      * @return String of a name prefix in the specified style
      */
@@ -304,7 +295,6 @@ public class Chance {
         } else {
             return (String) this.pick(NAME_PREFIXES_SHORT);
         }
-
     }
 
     // -- Dice --
@@ -340,7 +330,12 @@ public class Chance {
         return this.integer(1, 100);
     }
 
-    public enum Age {CHILD, TEEN, ADULT, SENIOR}
+    public static enum Age {
+        CHILD,
+        TEEN,
+        ADULT,
+        SENIOR
+    }
 
 
 }
